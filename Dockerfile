@@ -1,17 +1,7 @@
-# Usa una imagen oficial de Ruby
-FROM ruby:3.1-alpine
+FROM php:7.4-apache
 
-# Instalar dependencias de Sinatra
-RUN gem install sinatra
+# Establecer el nombre del servidor para evitar el aviso
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
-# Crear el directorio de trabajo
-WORKDIR /app
-
-# Copiar el archivo del proyecto
-COPY . .
-
-# Expón el puerto 4567
-EXPOSE 4567
-
-# Ejecutar la aplicación Ruby
-CMD ["ruby", "app.rb"]
+COPY index.php /var/www/html/
+EXPOSE 80
